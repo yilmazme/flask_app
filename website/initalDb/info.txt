@@ -1,0 +1,3 @@
+the folder is for creating database only once and not overwrite
+
+see create_database function in __init_.py
