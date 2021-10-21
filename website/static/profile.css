@@ -1,0 +1,29 @@
+#main{
+    width: 100%;
+    height: fit-content;
+    background-image: url(../static/photos/category.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: repeat-y;
+    margin-left: 0;
+    position: absolute;
+    left: 0;
+    top:0;
+}
+
+#left{
+    background-color: rgba(127, 255, 212, 0.575);
+    height: 100vh;
+    padding-top: 5rem;
+}
+
+#right{
+    padding-top: 5rem;
+    padding-left: -6rem;
+    text-align: center;
+}
+#right h4{
+    background-color:rgba(127, 255, 212, 0.575) ;
+
+    color: rgb(19, 18, 17);
+}

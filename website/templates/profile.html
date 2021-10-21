@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}Sayfam{%endblock%}
+{% block style %}profile{%endblock%}
+
+
+{% block content %}
+<div class="row justify-content-between align-items-center" id="main">
+    <div class="col-4 align-self-center" id="left">
+        <h5 class="text-center"> Yeni Soru Ekle</h5>
+        <form method="post" class="form">
+            <textarea name="note" id="note" cols="16" rows="4" class="form-control" placeholder="Soru metni"></textarea>
+            <div class="form-group">
+                <label class="form-label" for="opA">A)</label>
+                <input class="form-control" type="text" name="opA" id="opA">
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="opB">B)</label>
+                <input class="form-control" type="text" name="opB" id="opB">
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="opC">C)</label>
+                <input class="form-control" type="text" name="opC" id="opC">
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="opD">D)</label>
+                <input class="form-control" type="text" name="opD" id="opD">
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="correctOp">Doğru Cevap: </label>
+                <select class="form-select" name="correctOp" id="correctOp">
+                    <option value="A">Seçiniz</option>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="categoryId">Kategori: </label>
+                <select class="form-select" name="categoryId" id="categoryId">
+                    <option value="1">Seçiniz</option>
+                    {% for category in categories %}
+                    <option value={{category.id}}>{{category.categoryName}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">
+                Soru Ekle
+            </button>
+        </form>
+    </div>
+    <div class="col-6 align-self-start" id="right">
+        <h4 class="text-center">Sorularım: {{notes_len}}</h4>
+        <ul class="list-group list-group-flush" id="notes">
+            {% for note in user.notes %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <p style="padding:0 1rem; text-align: left;">{{note.data}}</p>
+                <button type="button" class="close btn btn-danger btn-sm" onclick="deleteNote('{{note.id}}')">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+</div>
+
+
+
+{%endblock%}

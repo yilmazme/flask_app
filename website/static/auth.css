@@ -1,0 +1,21 @@
+#main{
+    width: 100%;
+    height: 100vh;
+    background-image: url(../static/photos/study.jpg);
+    background-position: center;
+    background-size: cover;
+    margin-left: 0;
+    position: absolute;
+    left: 0;
+    top:0;
+}
+
+#main form{
+    width: 30rem;
+    height: auto;
+    margin: auto;
+    margin-top: 10rem;
+    background-color: rgba(236, 168, 100, 0.534);
+    padding: 1rem;
+    border-radius: 4%;
+}

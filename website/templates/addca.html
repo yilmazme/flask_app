@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %} Kategori Ekle {%endblock%}
+{% block style %}auth{%endblock%}
+
+{% block content %}
+<div id="main">
+<h3 class="text-center">Kategori Ekle</h3>
+<form method="post">
+    <div class="form-group">
+        <label for="categoryId" class="form-label">Kategori: </label>
+        <input type="text" name="category" id="category" class="form-control">
+    </div>
+    <br>
+    <button type="submit" class="btn btn-primary">
+        Ekle
+    </button>
+</form>
+</div>
+
+{%endblock%}

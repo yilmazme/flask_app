@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from os import path
+import os
 from flask_login import LoginManager, login_manager
 
 db = SQLAlchemy()
@@ -50,7 +50,8 @@ def create_app():
     return app
 
 def create_database(app):
-    if not path.exists("website/" + "initalDb"):
+    if not os.path.exists("website/"+"initalDb"):
+        os.mkdir("website/"+"initalDb")
         db.create_all(app=app)
         print("Database created!")
 

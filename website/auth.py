@@ -23,13 +23,13 @@ def login():
         user = User.query.filter_by(email=email).first()
         if user:
             if check_password_hash(user.password, password):
-                flash("Logged in successfully", category="success")
+                flash("Giriş başarılı ", category="success")
                 login_user(user, remember=True)
                 return redirect(url_for("views.home"))
             else:
-                flash("incorrecr password", category="error")
+                flash("mail ya da şifre hatalı", category="error")
         else:
-            flash("no such email", category="error")
+            flash("mail ya da şifre hatalı", category="error")
 
     return render_template("login.html", user=current_user)
 
@@ -52,22 +52,22 @@ def sign_up():
         user = User.query.filter_by(email=email).first()
 
         if user:
-             flash("email already exist", category="error")
-        elif len(email)<4:
-            flash("email length should be at least 4 characters", category="error")
+             flash("Mail adresine ait bir hesap var!", category="error")
+        elif len(email)<5:
+            flash("Sen hiç 4 karakter ya da daha azından oluşan mail adresi gördün mü?", category="error")
         elif len(name)<2:
-            flash("name length should be at least 2 characters", category="error")
+            flash("2 harften az karakterli isim zor sanki!", category="error")
         elif password1 != password2:
-            flash("passwords should be same", category="error")
+            flash("Şifreler aynı değil!", category="error")
         elif len(password1)< 7:
-            flash("password length should be at least 7 characters", category="error")
+            flash("Şifren en az 7 karakterli olsun!", category="error")
         else:
             #add users
             new_user = User(email=email, name = name, password=generate_password_hash(password1, method="sha256"))
             db.session.add(new_user)
             db.session.commit()
             login_user(new_user, remember=True)
-            flash("account created", category="success")
+            flash("Hesap başarılı bir şekilde oluşturuldu", category="success")
             return redirect(url_for("views.home"))
             
     return render_template("sign_up.html", user=current_user)

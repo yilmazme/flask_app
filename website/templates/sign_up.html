@@ -1,32 +1,35 @@
 {% extends "base.html" %}
 
-{% block title %}Sign up{%endblock%}
+{% block title %}Kayıt ol{%endblock%}
+{% block style %}auth{%endblock%}
 
 
 {% block content %}
 
-<form method="post">
-    <h3 class="text-center">
-        Sign up
-    </h3>
-    <div class="form-group">
-        <label for="email">Email:</label>
-        <input type="email" name="email" id="email" class="form-control" placeholder="enter email">
-    </div>
-    <div class="form-group">
-        <label for="name">First Name:</label>
-        <input type="text" name="name" id="name" class="form-control" placeholder="enter first name">
-    </div>
-    <div class="form-group">
-        <label for="password1">Password:</label>
-        <input type="password" name="password1" id="password1" class="form-control" placeholder="enter password">
-    </div>
-    <div class="form-group">
-        <label for="password2">Password Again:</label>
-        <input type="password" name="password2" id="password2" class="form-control" placeholder="enter password again">
-    </div>
-    <br>
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+<div id="main">
+    <form method="post">
+        <h3 class="text-center">
+            Kayıt
+        </h3>
+        <div class="form-group">
+            <label for="email" class="form-label">E Posta:</label>
+            <input type="email" name="email" id="email" class="form-control" placeholder="mailiniz">
+        </div>
+        <div class="form-group">
+            <label for="name" class="form-label">İsim:</label>
+            <input type="text" name="name" id="name" class="form-control" placeholder="isminiz">
+        </div>
+        <div class="form-group">
+            <label for="password1" class="form-label">Şifre:</label>
+            <input type="password" name="password1" id="password1" class="form-control" placeholder="şifre">
+        </div>
+        <div class="form-group">
+            <label for="password2" class="form-label">Şifre Tekrar:</label>
+            <input type="password" name="password2" id="password2" class="form-control" placeholder="şifre">
+        </div>
+        <br>
+        <button type="submit" class="btn btn-success">Kayıt</button>
+    </form>
+</div>
 
 {%endblock%}
