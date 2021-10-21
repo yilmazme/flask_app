@@ -18,12 +18,12 @@
 }
 
 #right{
-    padding-top: 5rem;
+    padding-top: 4rem;
     padding-left: -6rem;
     text-align: center;
 }
 #right h4{
     background-color:rgba(127, 255, 212, 0.575) ;
-
+    padding: 1rem 0 1rem 0;
     color: rgb(19, 18, 17);
 }
