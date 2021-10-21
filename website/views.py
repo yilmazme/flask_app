@@ -11,7 +11,7 @@ views = Blueprint("views", __name__)
 
 #redirect home
 @views.route("/", methods=["GET"])
-def home_redirect():
+def home_redir():
     return redirect(url_for("views.home"))
 
 # profile page for one user, can add, see and delete all their notes
