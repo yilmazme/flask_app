@@ -12,6 +12,10 @@ from flask_login import login_user, login_required, logout_user, current_user
 
 auth = Blueprint("auth", __name__)
 
+#open with login
+@auth.route("/", methods=["GET"])
+def home_redir():
+    return redirect(url_for("auth.login"))
 
 @auth.route("/login", methods=["GET", "POST"])
 def login():

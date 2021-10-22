@@ -2,13 +2,15 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 import os
 from flask_login import LoginManager, login_manager
+from flask_marshmallow import Marshmallow
+
 
 db = SQLAlchemy()
-
+ma = Marshmallow()
 
 def create_app():
     app = Flask(__name__)
-    ENV = "prod"
+    ENV = "dev"
 
     if ENV == "dev":
         app.debug = True
@@ -22,7 +24,7 @@ def create_app():
   
     app.config["SECRET_KEY"] = "KKKJ7878bhjbnbh8787"
     db.init_app(app)
-
+    ma.init_app(app)
 
 
     from .views import views

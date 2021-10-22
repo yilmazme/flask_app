@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %} Home {%endblock%}
+{% block title %} Anasayfa {%endblock%}
 {% block style %}home{%endblock%}
 
 
@@ -11,24 +11,24 @@
         <ul class="nav flex-column">
             {% for category in categories %}
             <li class="nav-item">
-              <a class="nav-link" href="/home/{{category.id}}"> {{category.categoryName}}</a>
+              <a class="nav-link" href="/home/{{category.id}}"> {{category.categoryName}}<span style="color:black; font-weight: 400; font-size: 14px;"> ({{category.notes | length}})</span></a> 
             </li>
             {% endfor %}
          </ul>
     </div>
     <div class="col-10" id="study_area">
-            {% for note in filtered_notes %}
-            <div class="card" style="width: 30rem;">
+          
+            <div class="card" style="width: 30rem;" id="{{filtered_note.id}}">
                 <div class="card-body">
                   <h5 class="card-title">Soru</h5>
-                  <p class="card-text"> {{note.data}}</p>
-                  <a href="#" class="card-link">A) {{note.opA}} </a>
-                  <a href="#" class="card-link">B) {{note.opB}} </a>
-                  <a href="#" class="card-link">C) {{note.opC}} </a>
-                  <a href="#" class="card-link">D) {{note.opD}} </a>
+                  <p class="card-text"> {{filtered_note.data}}</p>
+                  <a id="A{{filtered_note.id}}" href="#" class="card-link" onclick="makeChoice('{{filtered_note.id}}', 'A')">A) {{filtered_note.opA}} </a>
+                  <a id="B{{filtered_note.id}}" href="#" class="card-link" onclick="makeChoice('{{filtered_note.id}}', 'B')">B) {{filtered_note.opB}} </a>
+                  <a id="C{{filtered_note.id}}" href="#" class="card-link" onclick="makeChoice('{{filtered_note.id}}', 'C')">C) {{filtered_note.opC}} </a>
+                  <a id="D{{filtered_note.id}}" href="#" class="card-link" onclick="makeChoice('{{filtered_note.id}}', 'D')">D) {{filtered_note.opD}} </a>
                 </div>
               </div>
-            {% endfor %}
+           
     </div>
 </div>
 

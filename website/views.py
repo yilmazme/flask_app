@@ -1,18 +1,14 @@
-from flask import Blueprint, render_template, request, flash, redirect, url_for
+from flask import Blueprint, render_template, request, flash, redirect, url_for, jsonify
 
 from flask_login import  login_required, current_user
 
-from .models import Category, Note, User
+from .models import Category, Note, NoteSchema, User
 from . import db
 import json
 #to split up end points
 
 views = Blueprint("views", __name__)
 
-#redirect home
-@views.route("/", methods=["GET"])
-def home_redir():
-    return redirect(url_for("views.home"))
 
 # profile page for one user, can add, see and delete all their notes
 @views.route("/profile", methods=["GET", "POST"])
@@ -60,17 +56,40 @@ def add_category():
 @views.route("/home/<int:id>")
 @login_required
 def home(id):
-    filtered_notes = Note.query.filter(Note.category_id == id)
-    notes = db.session.query(Note)
+    filtered_note = Note.query.filter(Note.category_id == id).first()
+    #notes = db.session.query(Note)
     categories = db.session.query(Category)
-    return render_template("home.html", notes=notes, categories=categories, user=current_user, filtered_notes=filtered_notes)
+    return render_template("home.html", categories=categories, user=current_user, filtered_note=filtered_note)
 
-#get questions of a category
-# @views.route("/home/<int:id>", methods=["POST"])
-# def delete_note():
-#     notes = Note.query.get(id)
-#     return render_template("home.html",  notes=notes, user=current_user)
+# api call for a category
+# here we i use marshmallow for json serilization
+#not used at front end for now
+@views.route("/get-set", methods=["POST"])
+def get_set():
+    body= json.loads(request.data)
+    id = body["id"]
+    filtered_notes = Note.query.filter(Note.category_id == id).all()
+    notes_schema = NoteSchema(many=True) 
+    output =  notes_schema.dump(filtered_notes)
+    return jsonify({"res":output})
 
+
+# get choosen op and respond
+
+
+@views.route("/make-choice", methods=["POST"])
+def get_choice():
+    answer_obj = json.loads(request.data)
+    question_id = answer_obj["questionId"]
+    choosen_op = answer_obj["choosenOp"]
+    question = Note.query.filter(Note.id == question_id).first()
+    if question:
+        if question.correctOp==choosen_op:
+            return json.dumps({"res":True})
+        else:
+            return json.dumps({"res":False, "answer":question.correctOp})
+    return json.dumps({"res":"no quest find"})
+    
 # this is the end point for a user delete their notes(request sending by javascript from frontend)
 @views.route("/delete-note", methods=["POST"])
 def delete_note():

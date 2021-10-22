@@ -1,5 +1,5 @@
 from enum import unique
-from . import db
+from . import db, ma
 from flask_login import UserMixin
 from sqlalchemy.sql import func
 
@@ -49,3 +49,20 @@ class Category(db.Model):
 
     def __init__(self, categoryName):
         self.categoryName = categoryName
+
+
+#these are for json serililzation (marshmallow)
+class NoteSchema(ma.SQLAlchemyAutoSchema):
+    class Meta:
+        model = Note
+        load_instance = True
+
+class UserSchema(ma.SQLAlchemyAutoSchema):
+    class Meta:
+        model = User
+        load_instance = True
+        
+class CategorySchema(ma.SQLAlchemyAutoSchema):
+    class Meta:
+        model = Category
+        load_instance = True
