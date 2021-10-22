@@ -56,10 +56,24 @@ def add_category():
 @views.route("/home/<int:id>")
 @login_required
 def home(id):
-    filtered_note = Note.query.filter(Note.category_id == id).first()
+    filtered_note = Note.query.filter(Note.category_id == id).order_by(Note.id ).first()
     #notes = db.session.query(Note)
     categories = db.session.query(Category)
     return render_template("home.html", categories=categories, user=current_user, filtered_note=filtered_note)
+
+
+#next quest
+
+@views.route("/questions/<int:id>")
+@login_required
+def get_next(id):
+    filtered_note = Note.query.get(id)
+    #notes = db.session.query(Note)
+    categories = db.session.query(Category)
+    return render_template("home.html", categories=categories, user=current_user, filtered_note=filtered_note)
+
+
+
 
 # api call for a category
 # here we i use marshmallow for json serilization
@@ -68,7 +82,7 @@ def home(id):
 def get_set():
     body= json.loads(request.data)
     id = body["id"]
-    filtered_notes = Note.query.filter(Note.category_id == id).all()
+    filtered_notes = Note.query.filter(Note.category_id == id).order_by(Note.id).all()
     notes_schema = NoteSchema(many=True) 
     output =  notes_schema.dump(filtered_notes)
     return jsonify({"res":output})
