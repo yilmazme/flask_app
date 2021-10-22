@@ -21,7 +21,7 @@
 }
 
 #result{
-   background-color: azure;
+    display: none;
    width: 30rem;
    text-align: center;
 }

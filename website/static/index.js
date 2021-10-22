@@ -11,22 +11,24 @@ rightLength? rightLength.innerHTML = sessionStorage.getItem("rLength"): null;
 
 
 window.addEventListener("load",()=>{
-  if(sessionStorage.getItem("qLength") !== sessionStorage.getItem("aLength")){
+  if(sessionStorage.getItem("qLength") != sessionStorage.getItem("aLength") || sessionStorage.getItem("aLength")==0){
     result.style.display = "none"
   }else{
-    result.style.display = "inherit"
+    result.style.display = "block"
     let ratio = (sessionStorage.getItem("rLength") / sessionStorage.getItem("qLength"))*100
     if(ratio>=80){
+      result.style.backgroundColor = "green"
       ratioDiv.innerHTML=ratio + "/100"
       commentDiv.innerHTML="O bir uzman, o mütevazı bir insan..."
     }
-    else if(80>ratio & ratio>=60)
+    else if(80>ratio && ratio>=60)
     {
       ratioDiv.innerHTML=ratio + "/100"
       commentDiv.innerHTML="Fena değil ama daha iyi olabilir, bunu sen de biliyorsun..."
     }
     else
     {
+      result.style.backgroundColor = "red"
       ratioDiv.innerHTML=ratio + "/100"
       commentDiv.innerHTML="Bu sonuç sana yakışıyor mu?"
     }
