@@ -11,7 +11,7 @@ rightLength? rightLength.innerHTML = sessionStorage.getItem("rLength"): null;
 
 
 window.addEventListener("load",()=>{
-  if(sessionStorage.getItem("qLength") != sessionStorage.getItem("aLength") || sessionStorage.getItem("aLength")==0){
+  if(sessionStorage.getItem("qLength") != sessionStorage.getItem("aLength") || sessionStorage.getItem("aLength")==0 || sessionStorage.getItem("aLength")==null){
     result.style.display = "none"
   }else{
     result.style.display = "block"
